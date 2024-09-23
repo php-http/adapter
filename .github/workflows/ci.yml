@@ -25,6 +25,10 @@ jobs:
           tools: composer:v2
           coverage: none
 
+      - name: Emulate PHP 8.3
+        run: composer config platform.php 8.3.999
+        if: matrix.php == '8.4'
+
       - name: Install dependencies
         run: composer update --prefer-dist --no-interaction --no-progress
 
@@ -49,6 +53,10 @@ jobs:
           tools: composer:v2
           coverage: none
 
+      - name: Emulate PHP 8.3
+        run: composer config platform.php 8.3.999
+        if: matrix.php == '8.4'
+
       - name: Install dependencies
         run: |
           composer require "sebastian/comparator:^3.0.2" --no-interaction --no-update
@@ -68,7 +76,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: '7.4'
           tools: composer:v2
           coverage: xdebug
 
