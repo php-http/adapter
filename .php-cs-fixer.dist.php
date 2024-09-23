@@ -9,6 +9,7 @@ $config = (new PhpCsFixer\Config())
     ->setRiskyAllowed(true)
     ->setRules([
         '@Symfony' => true,
+        'trailing_comma_in_multiline' => false,
     ])
     ->setFinder($finder)
 ;

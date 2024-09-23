@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2']
+        php: ['7.1', '7.2', '7.3', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -24,6 +24,10 @@ jobs:
           php-version: ${{ matrix.php }}
           tools: composer:v2
           coverage: none
+
+      - name: Emulate PHP 8.3
+        run: composer config platform.php 8.3.999
+        if: matrix.php == '8.4'
 
       - name: Install dependencies
         run: composer update --prefer-dist --no-interaction --no-progress
@@ -36,11 +40,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: ['7.1', '7.4', '8.0', '8.1', '8.2']
+        php: ['7.1', '7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
@@ -48,6 +52,10 @@ jobs:
           php-version: ${{ matrix.php }}
           tools: composer:v2
           coverage: none
+
+      - name: Emulate PHP 8.3
+        run: composer config platform.php 8.3.999
+        if: matrix.php == '8.4'
 
       - name: Install dependencies
         run: |
@@ -63,12 +71,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 7.4
+          php-version: '7.4'
           tools: composer:v2
           coverage: xdebug
 
